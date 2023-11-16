@@ -10,6 +10,20 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Online News'),
+        centerTitle: true,
+      ),
+      body: Container(
+        child: Column(
+          children: [
+            Image.asset('images/splash_pic.jpg',
+            fit: BoxFit.cover,
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
