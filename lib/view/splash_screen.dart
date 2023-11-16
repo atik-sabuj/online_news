@@ -19,9 +19,8 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
 
-
   Timer(Duration(seconds: 2), () {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
   });
 }
 
@@ -42,15 +41,14 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             Image.asset('images/splash_pic.jpg',
             fit: BoxFit.cover,
-              //width: width * .9,
               height: height * .5,
             ),
 
-            SizedBox(height: height * 0.4,),
+            SizedBox(height: height * 0.2,),
 
-            Text('TOP HEADLINES', style: GoogleFonts.anton(letterSpacing: .6, color: Colors.grey.shade700),),
+            Text('TOP HEADLINES', style: GoogleFonts.anton(letterSpacing: 0.6, color: Colors.grey.shade700),),
 
-            SizedBox(height: height * 0.4,),
+            SizedBox(height: height * 0.1,),
 
             SpinKitChasingDots(
               color: Colors.blue,
