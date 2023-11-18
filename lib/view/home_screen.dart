@@ -52,18 +52,31 @@ class _HomeScreenState extends State<HomeScreen> {
                 }else {
                   return ListView.builder(
                     itemCount: snapshot.data!.articlesList!.length,
+                      scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
-                      return Container(
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Container(
-                              child: CachedNetworkImage(
-                                imageUrl: snapshot.data!.articlesList![index].urlToImage.toString(),
-
+                      return SizedBox(
+                        child: Container(
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Container(
+                                height: height * 0.6,
+                                width: width * 1,
+                              padding: EdgeInsets.symmetric(
+                                horizontal: height * 0.1,
                               ),
-                            )
-                          ],
+                                child: CachedNetworkImage(
+                                  imageUrl: snapshot.data!.articlesList![index].urlToImage.toString(),
+
+                                  fit: BoxFit.cover,
+                                  placeholder: (context, url) => Container(child: spinKit2,),
+
+                                  errorWidget: (context, url, error) => Icon(Icons.error_outline, color: Colors.red,),
+
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       );
                       }
@@ -76,4 +89,11 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
 }
+
+
+const spinKit2 = SpinKitCircle(
+  color: Colors.amber,
+  size: 50,
+);
