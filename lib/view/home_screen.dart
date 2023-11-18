@@ -15,9 +15,6 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text('Home Screen'),
         centerTitle: true,
       ),
-      body: Column(
-        textDirection: TextStyle(color: Colors.teal),
-      )
     );
   }
 }
