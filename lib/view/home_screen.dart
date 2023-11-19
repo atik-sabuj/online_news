@@ -13,7 +13,7 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-enum FilterList {bbcNews, aryNews, independent, reuters, cnn, alJazeera}
+enum FilterList {bbcNews, abcNews, cbsNews, reuters, cnn, espn}
 
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -23,6 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
   FilterList? selectedMenu;
 
   final format = DateFormat('MMMM dd, yyyy');
+
+  String name = 'bbc-news';
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +44,81 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
 
         actions: [
-          PopupMenuButton(
-              itemBuilder: (context) => <PopupMenuEntry> [
-                PopupMenuItem(
-                    child: child
-                )
+          PopupMenuButton<FilterList>(
+            initialValue: selectedMenu,
+
+              icon: Icon(Icons.more_vert, color: Colors.black,),
+
+              onSelected: (FilterList item) {
+
+              if(FilterList.bbcNews.name == item.name) {
+                name = 'bbc-news';
+              }
+
+              if(FilterList.abcNews.name == item.name) {
+                name = 'abc-news';
+              }
+
+              if(FilterList.reuters.name == item.name) {
+                name = 'reuters';
+              }
+
+              if(FilterList.abcNews.name == item.name) {
+                name = 'cbs-news';
+              }
+
+              if(FilterList.cnn.name == item.name) {
+                name = 'cnn';
+              }
+
+              if(FilterList.espn.name == item.name) {
+                name = 'espn';
+              }
+
+
+
+              setState(() {
+                selectedMenu = item;
+              });
+
+              },
+
+              itemBuilder: (context) => <PopupMenuEntry<FilterList>> [
+                PopupMenuItem<FilterList>(
+                  value: FilterList.bbcNews,
+                    child: Text('BBC News'),
+                ),
+
+                PopupMenuItem<FilterList>(
+                  value: FilterList.abcNews,
+                  child: Text('abc News'),
+                ),
+
+                PopupMenuItem<FilterList>(
+                  value: FilterList.cbsNews,
+                  child: Text('CBS News'),
+                ),
+
+                PopupMenuItem<FilterList>(
+                  value: FilterList.reuters,
+                  child: Text('Reuters'),
+                ),
+
+                PopupMenuItem<FilterList>(
+                  value: FilterList.cnn,
+                  child: Text('CNN'),
+                ),
+
+                PopupMenuItem<FilterList>(
+                  value: FilterList.espn,
+                  child: Text('ESPN'),
+                ),
+
+
+
               ]
           ),
+
         ],
 
       ),
