@@ -13,9 +13,14 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
+enum FilterList {bbcNews, aryNews, independent, reuters, cnn, alJazeera}
+
+
 class _HomeScreenState extends State<HomeScreen> {
 
   NewsViewModel newsViewModel = NewsViewModel();
+
+  FilterList? selectedMenu;
 
   final format = DateFormat('MMMM dd, yyyy');
 
@@ -35,6 +40,17 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         title: Text('News 24/7', style: GoogleFonts.poppins(fontWeight: FontWeight.w700),),
         centerTitle: true,
+
+        actions: [
+          PopupMenuButton(
+              itemBuilder: (context) => <PopupMenuEntry> [
+                PopupMenuItem(
+                    child: child
+                )
+              ]
+          ),
+        ],
+
       ),
 
       body: ListView(
