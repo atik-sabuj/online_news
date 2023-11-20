@@ -1,4 +1,5 @@
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -34,6 +35,9 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.sizeOf(context).width * 1 ;
+    final height = MediaQuery.sizeOf(context).height * 1 ;
+
     return Scaffold(
       appBar: AppBar(),
 
@@ -44,7 +48,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             SizedBox(
               height: 50,
               child: ListView.builder(
-                scrollDirection: Axis.vertical,
+                scrollDirection: Axis.horizontal,
                   itemCount: categoriesList.length,
                 itemBuilder: (context, index){
 
@@ -82,29 +86,59 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               ),
             ),
 
-            FutureBuilder<CategoriesNewsModel>(
-              future: newsViewModel.fetchCategoriesNewsApi(categoryName),
-              builder: (BuildContext context, snapshot) {
-                if(snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
-                    child: SpinKitCircle(
-                      size: 50,
-                      color: Colors.blue,
-                    ),
-                  );
-                }else {
-                  return ListView.builder(
-                      itemCount: snapshot.data!.articles!.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
+            SizedBox(height: 20,),
 
-                        DateTime dateTime = DateTime.parse(snapshot.data!.articles![index].publishedAt.toString());
+            Expanded(
+              child: FutureBuilder<CategoriesNewsModel>(
+                future: newsViewModel.fetchCategoriesNewsApi(categoryName),
+                builder: (BuildContext context, snapshot) {
+                  if(snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: SpinKitCircle(
+                        size: 50,
+                        color: Colors.blue,
+                      ),
+                    );
+                  }else {
+                    return ListView.builder(
+                        itemCount: snapshot.data!.articles!.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+              
+                          DateTime dateTime = DateTime.parse(snapshot.data!.articles![index].publishedAt.toString());
+              
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 15),
+                            child: Row(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: CachedNetworkImage(
+                                    imageUrl: snapshot.data!.articles![index].urlToImage.toString(),
 
-                        return ;
-                      }
-                  );
-                }
-              },
+                                    fit: BoxFit.cover,
+                                    height : height * 0.8,
+                                    width : width * 0.3,
+
+                                    placeholder: (context, url) => Container(child: Center(
+                                      child: SpinKitCircle(
+                                        size: 50,
+                                        color: Colors.blue,
+                                      ),
+                                    ),),
+
+                                    errorWidget: (context, url, error) => Icon(Icons.error_outline, color: Colors.red,),
+
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                    );
+                  }
+                },
+              ),
             ),
           ],
         ),
