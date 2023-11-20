@@ -102,7 +102,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   }else {
                     return ListView.builder(
                         itemCount: snapshot.data!.articles!.length,
-                        scrollDirection: Axis.horizontal,
+                        scrollDirection: Axis.vertical,
                         itemBuilder: (context, index) {
               
                           DateTime dateTime = DateTime.parse(snapshot.data!.articles![index].publishedAt.toString());
@@ -117,8 +117,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                     imageUrl: snapshot.data!.articles![index].urlToImage.toString(),
 
                                     fit: BoxFit.cover,
-                                    height : height * 0.8,
-                                    width : width * 0.3,
+                                    height : height * 0.2,
+                                    width : width * 0.2,
 
                                     placeholder: (context, url) => Container(child: Center(
                                       child: SpinKitCircle(
@@ -130,6 +130,50 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                     errorWidget: (context, url, error) => Icon(Icons.error_outline, color: Colors.red,),
 
                                   ),
+                                ),
+
+                                Expanded(
+                                  child: Container(
+                                    height: height * 0.18,
+                                    padding : EdgeInsets.only(left: 15),
+                                    child: Column(
+                                      children: [
+                                        Text(snapshot.data!.articles![index].title.toString(),
+                                        maxLines: 3,
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 15,
+                                          color: Colors.black54,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                        ),
+
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(snapshot.data!.articles![index].source!.name.toString(),
+                                              style: GoogleFonts.poppins(
+                                                fontSize: 14,
+                                                color: Colors.black54,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            SizedBox(width: 1,),
+
+                                            Text(format.format(dateTime),
+                                              style: GoogleFonts.poppins(
+                                                fontSize: 12,
+                                                fontStyle: FontStyle.italic,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+
+                                      ],
+                                    ),
+                                  ),
+
                                 ),
                               ],
                             ),
