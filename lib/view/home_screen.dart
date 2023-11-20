@@ -141,11 +141,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 }else {
                   return ListView.builder(
-                    itemCount: snapshot.data!.articlesList!.length,
+                    itemCount: snapshot.data!.articles!.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
 
-                      DateTime dateTime = DateTime.parse(snapshot.data!.articlesList![index].publishedAt.toString());
+                      DateTime dateTime = DateTime.parse(snapshot.data!.articles![index].publishedAt.toString());
 
                       return SizedBox(
                         child: Container(
@@ -161,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(15),
                                 child: CachedNetworkImage(
-                                  imageUrl: snapshot.data!.articlesList![index].urlToImage.toString(),
+                                  imageUrl: snapshot.data!.articles![index].urlToImage.toString(),
 
                                   fit: BoxFit.cover,
                                   placeholder: (context, url) => Container(child: spinKit2,),
@@ -191,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         Container(
                                           width: width * 0.6,
 
-                                          child: Text(snapshot.data!.articlesList![index].title.toString(),
+                                          child: Text(snapshot.data!.articles![index].title.toString(),
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
                                           style: GoogleFonts.poppins(fontSize: 17, fontWeight: FontWeight.w700),
@@ -203,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             child: Row(
                                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                                               children: [
-                                                Text(snapshot.data!.articlesList![index].source!.name.toString(),
+                                                Text(snapshot.data!.articles![index].source!.name.toString(),
                                                   maxLines: 2,
                                                   overflow: TextOverflow.ellipsis,
                                                   style: GoogleFonts.poppins(fontSize: 13, fontWeight: FontWeight.w600),

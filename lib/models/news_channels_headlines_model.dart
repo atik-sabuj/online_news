@@ -1,17 +1,17 @@
 class NewsChannelsHeadlinesModel {
   String? status;
   int? totalResults;
-  List<Articles>? articlesList;
+  List<Articles>? articles;
 
-  NewsChannelsHeadlinesModel({this.status, this.totalResults, this.articlesList});
+  NewsChannelsHeadlinesModel({this.status, this.totalResults, this.articles});
 
   NewsChannelsHeadlinesModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     totalResults = json['totalResults'];
     if (json['articles'] != null) {
-      articlesList = <Articles>[];
+      articles = <Articles>[];
       json['articles'].forEach((v) {
-        articlesList!.add(new Articles.fromJson(v));
+        articles!.add(new Articles.fromJson(v));
       });
     }
   }
@@ -20,8 +20,8 @@ class NewsChannelsHeadlinesModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
     data['totalResults'] = this.totalResults;
-    if (this.articlesList != null) {
-      data['articles'] = this.articlesList!.map((v) => v.toJson()).toList();
+    if (this.articles != null) {
+      data['articles'] = this.articles!.map((v) => v.toJson()).toList();
     }
     return data;
   }
