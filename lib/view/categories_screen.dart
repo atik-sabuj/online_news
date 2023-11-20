@@ -17,14 +17,38 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
   final format = DateFormat('MMMM dd, yyyy');
 
-  String name = 'bbc-news';
+  String categoryName = 'General';
+
+  List<String> categoriesList = [
+    'General',
+    'Entertainment',
+    'Health',
+    'Sports',
+    'Business',
+    'Technology'
+  ];
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Category'),
+      appBar: AppBar(),
+
+      body: Column(
+        children: [
+          SizedBox(
+            height: 50,
+            child: ListView.builder(
+              scrollDirection: Axis.vertical,
+                itemCount: categoriesList.length,
+              itemBuilder: (context, index){
+                return Container(
+                  child: Text(categoriesList[index].toString()),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
