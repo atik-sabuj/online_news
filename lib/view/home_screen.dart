@@ -134,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
             height: height * 0.55,
             width: width,
             child: FutureBuilder<NewsChannelsHeadlinesModel>(
-              future: newsViewModel.fetchNewsChannelsHeadlinesApi(),
+              future: newsViewModel.fetchNewsChannelsHeadlinesApi(name),
               builder: (BuildContext context, snapshot) {
                 if(snapshot.connectionState == ConnectionState.waiting) {
                   return Center(
