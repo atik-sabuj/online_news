@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:online_news/models/categories_news_model.dart';
 import 'package:online_news/models/news_channels_headlines_model.dart';
 import 'package:online_news/view/categories_screen.dart';
 import 'package:online_news/view_model/news_view_model.dart';
@@ -34,6 +35,9 @@ class _HomeScreenState extends State<HomeScreen> {
     
     return Scaffold(
       appBar: AppBar(
+        title: Text('News 24/7', style: GoogleFonts.poppins(fontWeight: FontWeight.w700),),
+        centerTitle: true,
+
         leading: IconButton(
           onPressed: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => CategoriesScreen()));
@@ -44,8 +48,6 @@ class _HomeScreenState extends State<HomeScreen> {
               width: 30,
         ),
         ),
-        title: Text('News 24/7', style: GoogleFonts.poppins(fontWeight: FontWeight.w700),),
-        centerTitle: true,
 
         actions: [
           PopupMenuButton<FilterList>(
@@ -131,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: ListView(
         children: [
           SizedBox(
-            height: height * 0.55,
+            height: height * 0.40,
             width: width,
             child: FutureBuilder<NewsChannelsHeadlinesModel>(
               future: newsViewModel.fetchNewsChannelsHeadlinesApi(name),
@@ -186,8 +188,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   child: Container(
                                     alignment: Alignment.bottomCenter,
-                                    padding: EdgeInsets.all(15),
-                                    height: height * 0.22,
+                                    padding: EdgeInsets.all(8),
+                                    height: height * 0.18,
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -235,7 +237,107 @@ class _HomeScreenState extends State<HomeScreen> {
                 }
               },
             ),
-          )
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: FutureBuilder<CategoriesNewsModel>(
+              future: newsViewModel.fetchCategoriesNewsApi('General'),
+              builder: (BuildContext context, snapshot) {
+                if(snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: SpinKitCircle(
+                      size: 50,
+                      color: Colors.blue,
+                    ),
+                  );
+                }else {
+                  return ListView.builder(
+                      itemCount: snapshot.data!.articles!.length,
+                      shrinkWrap: true,
+                      //scrollDirection: Axis.vertical,
+                      itemBuilder: (context, index) {
+
+                        DateTime dateTime = DateTime.parse(snapshot.data!.articles![index].publishedAt.toString());
+
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 15),
+                          child: Row(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(15),
+                                child: CachedNetworkImage(
+                                  imageUrl: snapshot.data!.articles![index].urlToImage.toString(),
+
+                                  fit: BoxFit.cover,
+                                  height : height * 0.2,
+                                  width : width * 0.2,
+
+                                  placeholder: (context, url) => Container(child: Center(
+                                    child: SpinKitCircle(
+                                      size: 50,
+                                      color: Colors.blue,
+                                    ),
+                                  ),),
+
+                                  errorWidget: (context, url, error) => Icon(Icons.error_outline, color: Colors.red,),
+
+                                ),
+                              ),
+
+                              Expanded(
+                                child: Container(
+                                  height: height * 0.18,
+                                  padding : EdgeInsets.only(left: 15),
+                                  child: Column(
+                                    children: [
+                                      Text(snapshot.data!.articles![index].title.toString(),
+                                        maxLines: 3,
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 15,
+                                          color: Colors.black54,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+
+                                      Spacer(),
+
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(snapshot.data!.articles![index].source!.name.toString(),
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 14,
+                                              color: Colors.blue,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+
+
+                                          Text(format.format(dateTime),
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+
+
+                                    ],
+                                  ),
+                                ),
+
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                  );
+                }
+              },
+            ),
+          ),
         ],
       ),
     );

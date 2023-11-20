@@ -39,7 +39,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     final height = MediaQuery.sizeOf(context).height * 1 ;
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('News Categories'),
+        centerTitle: true,
+      ),
 
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -102,7 +105,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   }else {
                     return ListView.builder(
                         itemCount: snapshot.data!.articles!.length,
-                        scrollDirection: Axis.vertical,
+                        //scrollDirection: Axis.vertical,
                         itemBuilder: (context, index) {
               
                           DateTime dateTime = DateTime.parse(snapshot.data!.articles![index].publishedAt.toString());
@@ -147,22 +150,23 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                         ),
                                         ),
 
+                                        Spacer(),
+
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(snapshot.data!.articles![index].source!.name.toString(),
                                               style: GoogleFonts.poppins(
                                                 fontSize: 14,
-                                                color: Colors.black54,
+                                                color: Colors.blue,
                                                 fontWeight: FontWeight.w600,
                                               ),
                                             ),
-                                            SizedBox(width: 1,),
+
 
                                             Text(format.format(dateTime),
                                               style: GoogleFonts.poppins(
                                                 fontSize: 12,
-                                                fontStyle: FontStyle.italic,
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             ),
