@@ -14,7 +14,7 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-enum FilterList {bbcNews, abcNews, aljazeera, reuters, cnn, espn}
+enum FilterList {bbcNews, abcNews, cbsNews, reuters, cnn, espn}
 
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -63,8 +63,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 name = 'abc-news';
               }
 
-              if(FilterList.aljazeera.name == item.name) {
-                name = 'al-jazeera-english"';
+              if(FilterList.cbsNews.name == item.name) {
+                name = 'cbs-news';
               }
 
               if(FilterList.reuters.name == item.name) {
@@ -100,8 +100,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
 
                 PopupMenuItem<FilterList>(
-                  value: FilterList.aljazeera,
-                  child: Text('Al Jazeera English'),
+                  value: FilterList.cbsNews,
+                  child: Text('CBS News'),
                 ),
 
                 PopupMenuItem<FilterList>(
