@@ -280,7 +280,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     author: snapshot.data!.articles![index].author.toString(),
                                     description: snapshot.data!.articles![index].description.toString(),
                                     content: snapshot.data!.articles![index].content.toString(),
-                                    source: snapshot.data!.articles![index].source.toString()))
+                                    source: snapshot.data!.articles![index].source!.name.toString()))
                             );
                           },
 
