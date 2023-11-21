@@ -102,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 PopupMenuItem<FilterList>(
                   value: FilterList.aljazeera,
-                  child: Text('Al Jazeera'),
+                  child: Text('Al Jazeera English'),
                 ),
 
                 PopupMenuItem<FilterList>(
