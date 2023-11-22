@@ -6,6 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:online_news/models/categories_news_model.dart';
+import 'package:online_news/view/news_details_screen.dart';
 import 'package:online_news/view_model/news_view_model.dart';
 
 class CategoriesScreen extends StatefulWidget {
@@ -110,76 +111,91 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               
                           DateTime dateTime = DateTime.parse(snapshot.data!.articles![index].publishedAt.toString());
               
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 15),
-                            child: Row(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(15),
-                                  child: CachedNetworkImage(
-                                    imageUrl: snapshot.data!.articles![index].urlToImage.toString(),
+                          return InkWell(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                                  NewsDetailsScreen(
+                                      newsImage: snapshot.data!.articles![index].urlToImage.toString(),
+                                      newsTitle: snapshot.data!.articles![index].title.toString(),
+                                      newsDate: snapshot.data!.articles![index].publishedAt.toString(),
+                                      author: snapshot.data!.articles![index].author.toString(),
+                                      description: snapshot.data!.articles![index].description.toString(),
+                                      content: snapshot.data!.articles![index].content.toString(),
+                                      source: snapshot.data!.articles![index].source!.name.toString()))
+                              );
+                            },
 
-                                    fit: BoxFit.cover,
-                                    height : height * 0.2,
-                                    width : width * 0.2,
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 15),
+                              child: Row(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(15),
+                                    child: CachedNetworkImage(
+                                      imageUrl: snapshot.data!.articles![index].urlToImage.toString(),
 
-                                    placeholder: (context, url) => Container(child: Center(
-                                      child: SpinKitCircle(
-                                        size: 50,
-                                        color: Colors.blue,
-                                      ),
-                                    ),),
+                                      fit: BoxFit.cover,
+                                      height : height * 0.2,
+                                      width : width * 0.2,
 
-                                    errorWidget: (context, url, error) => Icon(Icons.error_outline, color: Colors.red,),
-
-                                  ),
-                                ),
-
-                                Expanded(
-                                  child: Container(
-                                    height: height * 0.18,
-                                    padding : EdgeInsets.only(left: 15),
-                                    child: Column(
-                                      children: [
-                                        Text(snapshot.data!.articles![index].title.toString(),
-                                        maxLines: 3,
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 15,
-                                          color: Colors.black54,
-                                          fontWeight: FontWeight.w700,
+                                      placeholder: (context, url) => Container(child: Center(
+                                        child: SpinKitCircle(
+                                          size: 50,
+                                          color: Colors.blue,
                                         ),
-                                        ),
+                                      ),),
 
-                                        Spacer(),
+                                      errorWidget: (context, url, error) => Icon(Icons.error_outline, color: Colors.red,),
 
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(snapshot.data!.articles![index].source!.name.toString(),
-                                              style: GoogleFonts.poppins(
-                                                fontSize: 14,
-                                                color: Colors.blue,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-
-
-                                            Text(format.format(dateTime),
-                                              style: GoogleFonts.poppins(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-
-
-                                      ],
                                     ),
                                   ),
 
-                                ),
-                              ],
+                                  Expanded(
+                                    child: Container(
+                                      height: height * 0.18,
+                                      padding : EdgeInsets.only(left: 15),
+                                      child: Column(
+                                        children: [
+                                          Text(snapshot.data!.articles![index].title.toString(),
+                                          maxLines: 3,
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 15,
+                                            color: Colors.black54,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                          ),
+
+                                          Spacer(),
+
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(snapshot.data!.articles![index].source!.name.toString(),
+                                                style: GoogleFonts.poppins(
+                                                  fontSize: 14,
+                                                  color: Colors.blue,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+
+
+                                              Text(format.format(dateTime),
+                                                style: GoogleFonts.poppins(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+
+
+                                        ],
+                                      ),
+                                    ),
+
+                                  ),
+                                ],
+                              ),
                             ),
                           );
                         }

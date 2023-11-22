@@ -222,7 +222,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 Text(snapshot.data!.articles![index].source!.name.toString(),
                                                   maxLines: 2,
                                                   overflow: TextOverflow.ellipsis,
-                                                  style: GoogleFonts.poppins(fontSize: 13, fontWeight: FontWeight.w600),
+                                                  style: GoogleFonts.poppins(fontSize: 13, fontWeight: FontWeight.w600,color: Colors.blue),
                                                 ),
 
                                                 Text(format.format(dateTime),
