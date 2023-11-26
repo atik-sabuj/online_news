@@ -176,14 +176,29 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(15),
-                                child: CachedNetworkImage(
-                                  imageUrl: snapshot.data!.articles![index].urlToImage.toString(),
+                                child: InkWell(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                                        NewsDetailsScreen(
+                                            newsImage: snapshot.data!.articles![index].urlToImage.toString(),
+                                            newsTitle: snapshot.data!.articles![index].title.toString(),
+                                            newsDate: snapshot.data!.articles![index].publishedAt.toString(),
+                                            author: snapshot.data!.articles![index].author.toString(),
+                                            description: snapshot.data!.articles![index].description.toString(),
+                                            content: snapshot.data!.articles![index].content.toString(),
+                                            source: snapshot.data!.articles![index].source!.name.toString()))
+                                    );
 
-                                  fit: BoxFit.cover,
-                                  placeholder: (context, url) => Container(child: spinKit2,),
+                                  },
+                                  child: CachedNetworkImage(
+                                    imageUrl: snapshot.data!.articles![index].urlToImage.toString(),
 
-                                  errorWidget: (context, url, error) => Icon(Icons.error_outline, color: Colors.red,),
+                                    fit: BoxFit.cover,
+                                    placeholder: (context, url) => Container(child: spinKit2,),
 
+                                    errorWidget: (context, url, error) => Icon(Icons.error_outline, color: Colors.red,),
+
+                                  ),
                                 ),
                                 ),
                               ),
