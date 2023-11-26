@@ -1,6 +1,6 @@
 # online_news
 
-A new Flutter project.
+An Online News App is a digital platform that aggregates news and information from various sources, providing users with easy access to current events, stories, and updates across different categories like General, Entertainment, Health, Sports, Business, Technology, entertainment, and more. These portals often offer multimedia content, including articles and images, allowing users to stay informed about global and local news anytime, anywhere, through this app or dedicated mobile applications. We have best news channels like BBC, Al Jazeera, ABC,CBS, Reuters, CNN, ESPN.They serve as a convenient hub for accessing diverse perspectives and staying up-to-date with the rapidly changing world.
 
 ## Getting Started
 
