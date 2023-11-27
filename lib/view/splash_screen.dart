@@ -42,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('images/splash_pic.jpg',
+            Image.asset('images/online_news.png',
             fit: BoxFit.cover,
               height: height * .5,
             ),
