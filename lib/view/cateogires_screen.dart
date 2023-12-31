@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 import '../bloc/news_bloc.dart';
 import '../bloc/news_event.dart';
 import '../bloc/news_states.dart';
+import 'news_detail_screen.dart';
 
 
 class CategoriesScreen extends StatefulWidget {
@@ -112,18 +113,47 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                 children: [
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(15),
-                                    child: CachedNetworkImage(
-                                      imageUrl: state.newsCategoriesList!.articles![index].urlToImage.toString(),
-                                      fit: BoxFit.cover,
-                                      height: height * .18,
-                                      width: width * .3,
-                                      placeholder:  (context , url) => Container(child: Center(
-                                        child: SpinKitCircle(
-                                          size: 50,
-                                          color: Colors.blue,
-                                        ),
-                                      ),),
-                                      errorWidget: (context, url  ,error) => Icon(Icons.error_outline ,color: Colors.red,),
+
+                                    child: InkWell(
+                                      onTap: (){
+                                        String newsImage =
+                                        state.newsList!.articles![index].urlToImage!;
+                                        String newsTitle =
+                                        state.newsList!.articles![index].title!;
+                                        String newsDate =
+                                        state.newsList!.articles![index].publishedAt!;
+                                        String newsAuthor =
+                                        state.newsList!.articles![index].author!;
+                                        String newsDesc =
+                                        state.newsList!.articles![index].description!;
+                                        String newsContent =
+                                        state.newsList!.articles![index].content!;
+                                        String newsSource =
+                                        state.newsList!.articles![index].source!.name!;
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => NewsDetailScreen(
+                                            newsImage,
+                                            newsTitle,
+                                            newsDate,
+                                            newsAuthor,
+                                            newsDesc,
+                                            newsContent,
+                                            newsSource
+                                        )));
+                                      },
+
+                                      child: CachedNetworkImage(
+                                        imageUrl: state.newsCategoriesList!.articles![index].urlToImage.toString(),
+                                        fit: BoxFit.cover,
+                                        height: height * .18,
+                                        width: width * .3,
+                                        placeholder:  (context , url) => Container(child: Center(
+                                          child: SpinKitCircle(
+                                            size: 50,
+                                            color: Colors.blue,
+                                          ),
+                                        ),),
+                                        errorWidget: (context, url  ,error) => Icon(Icons.error_outline ,color: Colors.red,),
+                                      ),
                                     ),
                                   ),
                                   Expanded(
