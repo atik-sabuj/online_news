@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     
-    Timer(Duration(seconds: 2), () { 
+    Timer(Duration(seconds: 3), () {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
     });
 
@@ -38,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('images/splash_pic.jpg',
+            Image.asset('images/online_news.png',
             fit: BoxFit.cover,
               height:  height * .5,
             ),
