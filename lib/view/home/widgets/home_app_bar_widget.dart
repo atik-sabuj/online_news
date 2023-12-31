@@ -8,7 +8,7 @@ import '../../../bloc/news_event.dart';
 import '../../cateogires_screen.dart';
 
 
-enum FilterList { bbcNews, aryNews , independent , reuters, cnn, alJazeera}
+enum FilterList { bbcNews, alJazeera, abcNews , cbsNews , reuters, cnn, espn}
 FilterList? selectedMenu ;
 
 class HomeAppBarWidget extends StatelessWidget {
@@ -38,12 +38,29 @@ class HomeAppBarWidget extends StatelessWidget {
               if(FilterList.bbcNews.name == item.name){
                 name = 'bbc-news' ;
               }
-              if(FilterList.aryNews.name ==item.name){
-                name  = 'ary-news';
-              }
 
               if(FilterList.alJazeera.name ==item.name){
                 name  = 'al-jazeera-english';
+              }
+
+              if(FilterList.abcNews.name ==item.name){
+                name  = 'abc-news';
+              }
+
+              if(FilterList.cbsNews.name ==item.name){
+                name  = 'cbs-news';
+              }
+
+              if(FilterList.reuters.name ==item.name){
+                name  = 'reuters';
+              }
+
+              if(FilterList.cnn.name ==item.name){
+                name  = 'cnn';
+              }
+
+              if(FilterList.espn.name ==item.name){
+                name  = 'espn';
               }
 
 
@@ -57,12 +74,28 @@ class HomeAppBarWidget extends StatelessWidget {
                 child: Text('BBC News'),
               ),
               PopupMenuItem<FilterList>(
-                value: FilterList.aryNews ,
-                child: Text('Ary News'),
-              ),
-              PopupMenuItem<FilterList>(
                 value: FilterList.alJazeera ,
                 child: Text('Al-Jazeera News'),
+              ),
+              PopupMenuItem<FilterList>(
+                value: FilterList.abcNews ,
+                child: Text('ABC News'),
+              ),
+              PopupMenuItem<FilterList>(
+                value: FilterList.cbsNews ,
+                child: Text('CBS News'),
+              ),
+              PopupMenuItem<FilterList>(
+                value: FilterList.reuters ,
+                child: Text('Reuters'),
+              ),
+              PopupMenuItem<FilterList>(
+                value: FilterList.cnn ,
+                child: Text('CNN'),
+              ),
+              PopupMenuItem<FilterList>(
+                value: FilterList.espn ,
+                child: Text('ESPN'),
               ),
             ]
         )
