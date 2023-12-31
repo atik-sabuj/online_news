@@ -75,7 +75,7 @@ class HomeAppBarWidget extends StatelessWidget {
               ),
               PopupMenuItem<FilterList>(
                 value: FilterList.alJazeera ,
-                child: Text('Al-Jazeera News'),
+                child: Text('Al-Jazeera'),
               ),
               PopupMenuItem<FilterList>(
                 value: FilterList.abcNews ,
