@@ -9,8 +9,9 @@ import 'package:online_news/models/news_channels_headlines_model.dart';
 class NewsRepository {
 
   Future<NewsChannelsHeadlinesModel> fetchNewsChannelsHeadlinesApi(String channelName) async{
-
-    String url = 'https://newsapi.org/v2/top-headlines?sources=${channelName}&apiKey=a6376f2f94534529af242f6066c7a8aa';
+    
+//API CALL HERE(OWN API)
+    String url = 'https://newsapi.org/v2/top-headlines?sources=${channelName}&apiKey=WRITE HERE YOUR OWN NEWS API';
 
     print(url);
 
