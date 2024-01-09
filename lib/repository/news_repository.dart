@@ -25,8 +25,12 @@ class NewsRepository {
     }
   }
 
+  
+
   Future<NewsChannelsHeadlinesModel> fetchNewsChannelHeadlinesApi(String newsChannel) async {
-    String newsUrl = 'https://newsapi.org/v2/top-headlines?sources=${newsChannel}&apiKey=a6376f2f94534529af242f6066c7a8aa';
+
+    //API CALL HERE(OWN API)
+    String newsUrl = 'https://newsapi.org/v2/top-headlines?sources=${newsChannel}&apiKey=WRITE HERE YOUR OWN NEWS API';
     print(newsUrl);
     final response = await http.get(Uri.parse(newsUrl));
     print(response.statusCode.toString());
