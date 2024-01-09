@@ -35,7 +35,8 @@ class NewsRepository {
 
   Future<CategoriesNewsModel> fetchCategoriesNewsApi(String category) async{
 
-    String url = 'https://newsapi.org/v2/everything?q=${category}&apiKey=a6376f2f94534529af242f6066c7a8aa';
+    //API CALL HERE(OWN API)
+    String url = 'https://newsapi.org/v2/everything?q=${category}&apiKey=WRITE HERE YOUR OWN NEWS API';
 
     print(url);
 
